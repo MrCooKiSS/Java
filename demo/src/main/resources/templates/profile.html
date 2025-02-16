@@ -21,8 +21,8 @@
             Название: <strong th:text="${userTour.title}">Default Name</strong> <br>
             Город: <span th:text="${userTour.city}">Default City</span> <br>
             Описание: <span th:text="${userTour.description}">Default Description</span> <br>
-            Цена: <span th:text="${tour.price}">0.0</span> руб. <br>
-            Дата вылета: <span th:text="${tour.date}">Default Date</span><br>
+            Цена: <span th:text="${userTour.price}">0.0</span> руб. <br>
+            Дата вылета: <span th:text="${userTour.date}">Default Date</span><br>
             <a th:href="'/delete/' + ${userTour.id}">Удалить</a>
           </div>
         </li>
