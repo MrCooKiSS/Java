@@ -5,7 +5,8 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "users")
 public class User {
-    
+
+    // Геттеры и сеттеры
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -23,6 +24,7 @@ public class User {
     private Boolean admin = false;
 
     // Геттеры и сеттеры
+
     public Long getId() {
         return id;
     }
@@ -55,11 +57,12 @@ public class User {
         this.password = password;
     }
 
-    public Boolean getAdmin() {
+    public Boolean isAdmin() {
         return admin;
     }
 
     public void setAdmin(Boolean admin) {
         this.admin = admin;
     }
+
 }
