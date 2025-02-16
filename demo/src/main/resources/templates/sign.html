@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Вход</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="./sign.css" />
+</head>
+<body>
+    <div class="form">
+        <h1>Вход</h1>
+        <form th:action="@{/tours}" method="post">
+            <div class="form-floating">
+                <input type="text" class="form-control" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-floating">
+                <input type="text" class="form-control" name="password" placeholder="Password" required>
+            </div>
+            <button class="btn" type="submit">Войти</button>
+        </form>
+        <a href="/">Зарегистрироваться</a>
+    </div>
+</body>
+</html>

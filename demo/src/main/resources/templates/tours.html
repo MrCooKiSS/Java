@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Туры</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/tours.css" />
+</head>
+<body>
+  <header>
+    <div style="margin-left: 30px;">Tourbook</div>
+    <div class="search">
+      <input type="text" id="searchInput" placeholder="Введите текст для поиска...">
+    </div>
+    <div style="margin-right: 30px;"><a href="/profile">Профиль</a></div>  
+  </header>
+  <div id="searchResults">
+    <ul th:if="${tours != null and !tours.empty}">
+      <li th:each="tour : ${tours}" class="tours-info">
+        <div class="tour-item">
+          Название: <strong th:text="${tour.title}">Default Name</strong> <br>
+          Город: <span th:text="${tour.city}">Default City</span> <br>
+          Описание: <span th:text="${tour.description}">Default Description</span> <br>
+          Цена: <span th:text="${tour.price}">0.0</span> руб. <br>
+          Дата вылета: <span th:text="${tour.date}">Default Date</span><br>
+          <a th:href="'/book/' + ${tour.id}">Забронировать</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div th:if="${tours == null or tours.empty}" class="no-tours">
+    <p>Туры не найдены.</p>
+  </div>
+  <script>
+    document.getElementById('searchInput').addEventListener('input', function () {
+      let filter = this.value.toLowerCase();
+      let items = document.querySelectorAll('.tour-item');
+
+      items.forEach(function (item) {
+        let text = item.textContent.toLowerCase();
+        item.style.display = text.includes(filter) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

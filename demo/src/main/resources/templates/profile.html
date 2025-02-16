@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Профиль</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="/profile.css">
+</head>
+<body>
+    <header>
+        <div style="text-align: center; font-size: 200%;">Компания Tourbook</div>
+        <div style="text-align: center; font-size: 200%;"><a href="/tours">Все туры</a></div>  
+    </header>
+    <div>
+        <p><strong>Name:</strong> <span th:text="${user.name}">1</span></p>
+        <p><strong>Email:</strong> <span th:text="${user.email}">john@example.com</span></p>
+    </div>
+    <div>
+    <ul th:if="${userTours != null and !userTours.empty}">
+        <li th:each="userTour : ${userTours}" class="tours-info">
+          <div>
+            Название: <strong th:text="${userTour.title}">Default Name</strong> <br>
+            Город: <span th:text="${userTour.city}">Default City</span> <br>
+            Описание: <span th:text="${userTour.description}">Default Description</span> <br>
+            Цена: <span th:text="${tour.price}">0.0</span> руб. <br>
+            Дата вылета: <span th:text="${tour.date}">Default Date</span><br>
+            <a th:href="'/delete/' + ${userTour.id}">Удалить</a>
+          </div>
+        </li>
+    </ul>
+    </div>
+    <div th:if="${userTours == null or userTours.empty}">Здесь пусто</div>
+</body>
+</html>
