@@ -5,7 +5,8 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "cart")
 public class Cart {
-    
+
+    // Геттеры и сеттеры
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -17,6 +18,7 @@ public class Cart {
     private Long tourId;
 
     // Геттеры и сеттеры
+
     public Long getId() {
         return id;
     }
@@ -40,5 +42,4 @@ public class Cart {
     public void setTourId(Long tourId) {
         this.tourId = tourId;
     }
-
 }

@@ -1,7 +1,11 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "tours")
 public class Tour {
@@ -24,7 +28,9 @@ public class Tour {
 
     @Column(name = "date", nullable = false)
     private String date;
-    
+
+    // Геттеры и сеттеры
+
     public Long getId() {
         return id;
     }
@@ -64,7 +70,7 @@ public class Tour {
     public void setPrice(Float price) {
         this.price = price;
     }
-    
+
     public String getDate() {
         return date;
     }

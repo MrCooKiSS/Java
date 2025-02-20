@@ -1,23 +1,20 @@
 package com.example.demo.controller;
 
-
-import com.example.demo.database.TourRepository;
-import com.example.demo.database.UserRepository;
-import com.example.demo.database.CartRepository;
-import com.example.demo.models.Cart;
+import com.example.demo.models.Tour;
 import com.example.demo.models.User;
+import com.example.demo.models.Cart;
+import com.example.demo.repository.TourRepository;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.repository.CartRepository;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
-
-import com.example.demo.models.Tour;
-
-import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -27,12 +24,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
-@RequiredArgsConstructor
 public class MainController {
+
 	private final TourRepository tourRepository;
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
 
+	@Autowired
+	public MainController(TourRepository tourRepository, UserRepository userRepository, CartRepository cartRepository){
+		this.cartRepository = cartRepository;
+		this.tourRepository = tourRepository;
+		this.userRepository = userRepository;
+	}
 	@GetMapping("/")
 	public String register(Model model) {
 		return "register";
@@ -95,7 +98,7 @@ public class MainController {
 		boolean flag = false;
 
 		for (Cart item : userTours) {
-			if (item.getTourId() == tourId){
+			if (item.getTourId().equals(tourId)){
 				flag = true;
 			}
 		}
@@ -120,7 +123,7 @@ public class MainController {
 		for (Cart item : cart) {
 			Optional<Tour> tour = tourRepository.findById(item.getTourId());
 			if (tour.isPresent()){
-				if (tour.get().getId() == tourId){
+				if (tour.get().getId().equals(tourId)){
 					cartRepository.delete(item);
 				}
 				tours.add(tour.get());
